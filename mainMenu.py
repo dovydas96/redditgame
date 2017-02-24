@@ -1,16 +1,13 @@
 from Tkinter import *
-from PIL import ImageTk,Image
-import work
-import game
+import work,game
 
 def main():
     root = Tk(None,None," GuessTheSub")
-    text = work.texty(root)
+    text = work.texty(root,"Choose your difficulty")
     text.pack()
     work.buttoner(root)
 
     root.mainloop()
-    root.destroy()
 
 if __name__ == '__main__':
     main()

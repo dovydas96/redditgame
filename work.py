@@ -14,21 +14,32 @@ def maketk(url):
     imageb = urlopen(url[1]).read()
     data = io.BytesIO(imageb)
     img = Image.open(data)
-    img = img.resize((400,400),Image.ANTIALIAS)
+    img = img.resize((550,450),Image.ANTIALIAS)
     tkimg = ImageTk.PhotoImage(img)
     return tkimg
 
+#Sloppy code to be fixed once the main program is functional
 def but1(root):
-    button = Button(root, text = "Easy",width=22, command = lambda: game.easymode(root))
+    button = Button(root, text = "Easy",width=22, command = lambda: game.game_window(root," Easy Mode",5))
     return button
 
 def but2(root):
-    button = Button(root, text = "Medium",width=22, command = lambda: game.mediummode(root))
+    button = Button(root, text = "Medium",width=22, command = lambda: game.game_window(root," Medium Mode",10))
     return button
 
 def but3(root):
-    button = Button(root, text = "Hard",width=22,command = lambda: game.hardmode(root))
+    button = Button(root, text = "Hard",width=22, command = lambda: game.game_window(root," Hard Mode",10))
     return button
+
+def answerbuttn(root,correct,line):
+    button = Button(root,text = line, command = lambda: checker(root,correct,line))
+    return button
+
+def checker(root,correctSub,subName):
+    if correctSub == subName:
+        game.game_window(root,"Easy",5)
+
+
 
 def buttoner(root):
     butt1 = but1(root)

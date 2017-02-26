@@ -1,31 +1,15 @@
 from Tkinter import *
 import work,fetcher
 
-def easymode(root):
+def game_window(root,line,num):
     root.destroy()
-    root = Tk(None,None," EasyMode")
-    url = fetcher.get_link(4)
+    root = Tk(None,None,line)
+    url = fetcher.get_link(num)
     img = work.maketk(url)
     label = Label(root, image=img)
     label.pack(padx=5, pady=5)
-    root.mainloop()
+    for i in range(num):
+        button = work.answerbuttn(root,url[2],url[0][i])
+        button.pack()
 
-def mediummode(root):
-    root.destroy()
-    root = Tk(None,None," EasyMode")
-    url = fetcher.get_link(10)
-    img = work.maketk(url)
-    for i in url[0]:
-        print i
-    label = Label(root, image=img)
-    label.pack(padx=5, pady=5)
-    root.mainloop()
-
-def hardmode(root):
-    root.destroy()
-    root = Tk(None,None," Hard Mode")
-    url = fetcher.get_link(15)
-    img = work.maketk(url)
-    label = Label(root, image=img)
-    label.pack(padx=5, pady=5)
     root.mainloop()

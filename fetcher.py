@@ -24,17 +24,25 @@ def testWorkingLink(url):
     except:
         return(False)
 
-def get_link(num):
+def get_link(num,diff):
     tested = deque()
     subreddits = random_subs(num)
     print("Looking for an Image")
     for i in range(num):
         selecter = random.randrange(num-1)
         if selecter not in tested:
-            for sub in subreddits[selecter].new(limit=7):
-                tested.append(selecter)
-                if ("imgur" in sub.url or "reddituploads" in sub.url) and "gallery" not in sub.url:
-                    if testWorkingLink(sub.url):
-                        return(subreddits,sub.url,subreddits[selecter])
+            if diff == "hot":
+                for sub in subreddits[selecter].hot(limit=10):
+                    tested.append(selecter)
+                    if ("imgur" in sub.url or "reddituploads" in sub.url) and "gallery" not in sub.url:
+                        if testWorkingLink(sub.url):
+                            return(subreddits,sub.url,subreddits[selecter])
+            else:
+                for sub in subreddits[selecter].new(limit=10):
+                    tested.append(selecter)
+                    if ("imgur" in sub.url or "reddituploads" in sub.url) and "gallery" not in sub.url:
+                        if testWorkingLink(sub.url):
+                            return(subreddits,sub.url,subreddits[selecter])
+
     print("No images found!")
-    return(get_link(num))
+    return(get_link(num,diff))

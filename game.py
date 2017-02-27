@@ -1,15 +1,20 @@
 from Tkinter import *
 import work,fetcher
 
-def game_window(root,line,num):
+
+def game_window(root,line,num,diff):
     root.destroy()
     root = Tk(None,None,line)
-    url = fetcher.get_link(num)
+    top = Frame(root)
+    bottom = Frame(root)
+    top.pack(side = TOP)
+    bottom.pack(side = BOTTOM,fill = BOTH,expand= True)
+    url = fetcher.get_link(num,diff)
     img = work.maketk(url)
     label = Label(root, image=img)
-    label.pack(padx=5, pady=5)
+    label.pack(in_=top, side = LEFT)
     for i in range(num):
-        button = work.answerbuttn(root,url[2],url[0][i])
-        button.pack()
+        button = work.answerbuttn(root,url[2],url[0][i],line,num,diff)
+        button.pack(in_=top,side=TOP)
 
     root.mainloop()
